@@ -10,8 +10,8 @@ type InventoryRepository interface {
 }
 
 type UserRepository interface {
-	Save(*models.User) (*models.User, error)
-	SaveAll(*[]models.User) ([]*models.User, error)
-	FindAll() ([]*models.User, error)
-	FindById(string) (*models.User, error)
+	Save(*models.UserDecode) (*models.UserDecode, error)
+	SaveAll(*[]models.UserDecode) ([]*models.UserDecode, error)
+	FindAll() ([]*models.UserDecode, error)
+	FindById(string) (*models.UserDecode, error)
 }
