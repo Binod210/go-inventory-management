@@ -14,4 +14,6 @@ type UserRepository interface {
 	SaveAll(*[]models.UserDecode) ([]*models.UserDecode, error)
 	FindAll() ([]*models.UserDecode, error)
 	FindById(string) (*models.UserDecode, error)
+	FindByEmailAndUser(string, string) (bool, error)
+	DeleteUser(string) (bool, error)
 }
