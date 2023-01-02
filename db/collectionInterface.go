@@ -3,10 +3,11 @@ package db
 import "github.com/binod210/go-inventory-management/models"
 
 type InventoryRepository interface {
-	Save(*models.Item) (*models.Item, error)
-	SaveAll([]*models.Item) ([]*models.Item, error)
-	FindAll() ([]*models.Item, error)
-	FindById(string) (*models.Item, error)
+	Save(*models.ProductDecode) (*models.ProductDecode, error)
+	SaveAll([]*models.ProductDecode) ([]*models.ProductDecode, error)
+	FindAll() ([]*models.ProductDecode, error)
+	FindById(string) (*models.ProductDecode, error)
+	DeleteProduct(string) (bool, error)
 }
 
 type UserRepository interface {

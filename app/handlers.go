@@ -10,11 +10,14 @@ import (
 func (a *App) createHandlers() {
 	auth := authentication.NewJWT("my_secret", 120*time.Minute)
 	userService := services.NewUserService(a.Database.DB, auth)
-	// inventoryService:= services.InventoryService(a.Database.DB)
+	inventoryService := services.NewInventoryService(a.Database.DB, auth)
 
 	a.Router.HandleFunc("/user", userService.CreateUser).Methods("POST")
 	a.Router.HandleFunc("/user/login", userService.Login).Methods("POST")
 	a.Router.HandleFunc("/user", userService.UpdateUser).Methods("PUT")
 	a.Router.HandleFunc("/user/{id}", userService.DeleteUser).Methods("DELETE")
+
+	a.Router.HandleFunc("/inventory", inventoryService.AddProduct).Methods("POST")
+	a.Router.HandleFunc("/inventory", inventoryService.AddProduct).Methods("PUT")
 
 }
