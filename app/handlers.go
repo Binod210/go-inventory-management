@@ -19,5 +19,7 @@ func (a *App) createHandlers() {
 
 	a.Router.HandleFunc("/inventory", inventoryService.AddProduct).Methods("POST")
 	a.Router.HandleFunc("/inventory", inventoryService.AddProduct).Methods("PUT")
+	a.Router.HandleFunc("/inventory", inventoryService.GetProducts).Methods("GET")
+	a.Router.HandleFunc("/inventory/{id}", inventoryService.DeleteProduct).Methods("DELETE")
 
 }

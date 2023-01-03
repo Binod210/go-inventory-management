@@ -16,7 +16,7 @@ type InventoryCollection struct {
 }
 
 func NewInventoryRepository(Db *mongo.Database) InventoryRepository {
-	collection := Db.Collection("Inventory")
+	collection := Db.Collection("Products")
 	return &InventoryCollection{
 		Collection: collection,
 	}
@@ -63,7 +63,21 @@ func (col *InventoryCollection) SaveAll(products []*models.ProductDecode) ([]*mo
 }
 
 func (col *InventoryCollection) FindAll() ([]*models.ProductDecode, error) {
-	return nil, nil
+	cur, err := col.Collection.Find(context.TODO(), bson.D{})
+	if err != nil {
+		return nil, err
+	}
+	var products []*models.ProductDecode
+	for cur.Next(context.TODO()) {
+		product := models.Product{}
+		err = cur.Decode(&product)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+		products = append(products, convertToProductDecode(&product))
+	}
+	return products, nil
 }
 
 func (col *InventoryCollection) FindById(Id string) (*models.ProductDecode, error) {
