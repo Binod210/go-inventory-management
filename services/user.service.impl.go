@@ -9,20 +9,11 @@ import (
 	"github.com/binod210/go-inventory-management/db"
 	"github.com/binod210/go-inventory-management/models"
 	"github.com/gorilla/mux"
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type UserServiceImpl struct {
 	Collection db.UserRepository
 	Auth       *authentication.JWT
-}
-
-func NewUserService(Db *mongo.Database, auth *authentication.JWT) UserService {
-	collection := db.NewUserRepository(Db)
-	return &UserServiceImpl{
-		Collection: collection,
-		Auth:       auth,
-	}
 }
 
 func (us *UserServiceImpl) CreateUser(w http.ResponseWriter, r *http.Request) {
