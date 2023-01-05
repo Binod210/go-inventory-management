@@ -18,3 +18,11 @@ type UserRepository interface {
 	FindByEmailAndUser(string, string) (bool, error)
 	DeleteUser(string) (bool, error)
 }
+
+type OrderRepository interface {
+	Save(*models.OrderDecode) (*models.OrderDecode, error)
+	FindAll() ([]*models.OrderDecode, error)
+	Delete(string) error
+	FindById(string) (*models.OrderDecode, error)
+	FindByProductId(string) ([]*models.OrderDecode, error)
+}
